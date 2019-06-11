@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+     <title>One Page Resume</title>
+
+     <style type="text/css">
+        * { margin: 0; padding: 0; }
+        body { font: 16px Helvetica, Sans-Serif; line-height: 24px; background: url(images/noise.jpg); }
+        .clear { clear: both; }
+        #page-wrap { width: 800px; margin: 40px auto 60px; }
+        #pic { float: right; margin: -30px 0 0 0; }
+        h1 { margin: 0 0 16px 0; padding: 0 0 16px 0; font-size: 42px; font-weight: bold; letter-spacing: -2px; border-bottom: 1px solid #999; }
+        h2 { font-size: 20px; margin: 0 0 6px 0; position: relative; }
+        h2 span { position: absolute; bottom: 0; right: 0; font-style: italic; font-family: Georgia, Serif; font-size: 16px; color: #999; font-weight: normal; }
+        p { margin: 0 0 16px 0; }
+        a { color: #999; text-decoration: none; border-bottom: 1px dotted #999; }
+        a:hover { border-bottom-style: solid; color: black; }
+        ul { margin: 0 0 32px 17px; }
+        #objective { width: 500px; float: left; }
+        #objective p { font-family: Georgia, Serif; font-style: italic; color: #666; }
+        dt { font-style: italic; font-weight: bold; font-size: 18px; text-align: right; padding: 0 26px 0 0; width: 150px; float: left; height: 50px; border-right: 1px solid #999;  }
+        dd { width: 600px; float: right; }
+        dd.clear { float: none; margin: 0; height: 15px; }
+        #email {margin: 0 0 0 100px;}
+        #input_email {padding: 0 0 0 0; width: 600px; height: 30px;}
+        #submit {width: 50px; height: 50px;}
+     </style>
+</head>
+
+<body>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+
+      async function sendEmail() {
+        console.log('test')
+        try {
+          const input_email = document.getElementById("input_email").value
+          const response = await axios.post('http://localhost:3000/email', {
+              email: input_email
+          });
+          console.log(response);
+        } catch (error) {
+          console.error(error);
+        }
+      } 
+
+    </script>
+
+    <div id="page-wrap">
+    
+        <div id="contact-info" class="vcard">
+        
+            <!-- Microformats! -->
+        
+            <h1 class="fn">柯博文</h1>
+        
+            <p>
+                Email: <a class="email" href="kebowenver2@gmail.com">kebowenver2@gmail.com</a>
+            </p>
+        </div>
+                
+        <div id="objective">
+            <p>
+                熱愛寫程式的程式設計師，喜歡和三五好友一起研究程式相關的東西。
+            </p>
+        </div>
+        
+        <div class="clear"></div>
+        
+        <dl>
+            <dd class="clear"></dd>
+            
+            <dt>Education</dt>
+            <dd>
+                <h2>淡江大學資工系學士</h2>
+            </dd>
+            
+            <dd class="clear"></dd>
+            
+            <dt>Computer Skills</dt>
+            <dd>
+
+                <h2>Node.js</h2>
+                <p>利用 Express 框架與 api 串接，實作系上網站。</p>
+                <h2>Python</h2>
+                <p>利用 Python 撰寫簡易網站爬蟲，將匯率資料從銀行網站上抓下來。</p>
+                <h2>Database</h2>
+                <p>使用過 PostgreSQL, MySQL 等關連式資料庫</p>
+                <h2>others</h2>
+                <p>簡易 AWS 服務 (SES, ECR, S3, CloudFront .etc)。</p>
+                <p>基礎 Docker 操作與觀念。</p>
+                
+            </dd>
+            
+            <dd class="clear"></dd>
+
+            <dt>Experience</dt>
+            <dd>
+                
+                <h2>系上網站後端</h2>
+                <p>這次我使用了 Express 框架與 Knex 這個 SQl query builder 撰寫 MySQL。 </p>
+                <p>在這份專案當中有使用到檔案上傳的部分，我將檔案轉成 base64 之後上傳到 AWS 提供的服務 S3 上。</p>
+                <p>我在密碼加密的實作上採用了 bcrypt 套件來協助我，在登入驗證上我使用了 JWT 完成驗證。</p>
+                
+                <h2>履歷網站架設</h2>
+                <p>這個網站我從網路上找到了一些適合的套版，經過一些修改之後，放入個人資料作為前端。</p>
+                <p>將網站前端放在 S3 上，並將網站的後端使用 Docker 包起來，並將 Docker image 放在 ECR 上儲存。</p>
+                <p>最後我使用 SES 服務，將履歷檔案寄送至填寫的信箱。</p>
+
+                <h2>Docker 使用經驗</h2>
+                <p>撰寫 Dockerfile 將自己的專案產生出 image</p>
+                <p>利用 Docker Compose 同時啟動複數的 image ，並將程式與資料庫的 image 進行連結。</p>
+                
+            </dd>
+
+        </dl>
+        
+        <div class="clear"></div>
+        <div></div>
+
+        <p>
+        <h2 style="text-align: center">請輸入信箱，我會寄履歷到指定的信箱當中</h2>
+        <div id="email">
+            <input type="email" id="input_email" placeholder="Enter your Email"></input> <input type="submit" id="submit" onclick="sendEmail()"></input>
+        </div>
+        
+    </div>
+    
+</body>
+
+</html>
