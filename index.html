@@ -42,7 +42,7 @@
         console.log('test')
         try {
           const input_email = document.getElementById("input_email").value
-          const response = await axios.post('http://localhost:3000/email', {
+          const response = await axios.post('http://3.113.159.1:3000/email', {
               email: input_email
           });
           console.log(response);
@@ -105,7 +105,7 @@
             <dd>
                 
                 <h2>系上網站後端</h2>
-                <p>這次我使用了 Express 框架與 Knex 這個 SQl query builder 撰寫 MySQL。 </p>
+                <p>這次我使用了 Express 框架與 Knex 這個 SQL query builder 撰寫 MySQL。 </p>
                 <p>在這份專案當中有使用到檔案上傳的部分，我將檔案轉成 base64 之後上傳到 AWS 提供的服務 S3 上。</p>
                 <p>我在密碼加密的實作上採用了 bcrypt 套件來協助我，在登入驗證上我使用了 JWT 完成驗證。</p>
                 
